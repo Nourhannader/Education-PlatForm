@@ -1,0 +1,111 @@
+﻿@model education.ViewModel.RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_RegisterLayout";
+}
+
+<div class="content content-register animate__animated animate__fadeInLeft">
+    <div class="content-title">
+        <h3 class="p-2">Sign Up</h3>
+    </div>
+    <div class="row justify-content-center">
+       <div class="col-md-8">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-box">
+                <input asp-for="UserName" required />
+                <label asp-for="UserName"></label>
+            </div>
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <div class="input-box">
+                <input asp-for="Password" required />
+                <label asp-for="Password"></label>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="input-box">
+                <input asp-for="ConfirmPassword" required />
+                <label asp-for="ConfirmPassword"></label>
+            </div>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <div class="input-box">
+                <input asp-for="Email" required />
+                <label asp-for="Email"></label>
+            </div>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="input-box">
+                <input asp-for="FirstName" required />
+                <label asp-for="FirstName"></label>
+            </div>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+            <div class="input-box">
+                <input asp-for="LastName" required />
+                <label asp-for="LastName"></label>
+            </div>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+            <div class="register-role row justify-content-end">
+             <div class="role col-md-4 d-flex justify-content-end">
+                <div class="role-toggle">
+                    <input type="radio" asp-for="Role" id="rolestudent" value="Student" checked />
+                    <label for="rolestudent">Student</label>
+
+                    <input type="radio" asp-for="Role" id="roleInstructor" value="Instructor" />
+                    <label for="roleInstructor">Instructor</label>
+               </div>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            </div>
+
+            <div class="custom-file-upload">
+                <input asp-for="image" type="file" id="imageUpload" accept="image/*" onchange="previewImage()" hidden />
+
+                <label for="imageUpload" class="upload-btn">Choose Image</label>
+
+                <span id="file-name" class="file-name">No file chosen</span>
+
+                <div id="preview-box" class="preview-box" style="display:none;">
+                    <img id="preview-img" src="" alt="Image Preview" />
+                </div>
+
+                <span asp-validation-for="image" class="text-danger"></span>
+            </div>
+
+            <div class="btn-Register">
+                <input type="submit" value="Sig Up" class="btn btn-submit" />
+            </div>
+
+            <div class="signin-link">
+                Already have an account? <a asp-action="Login" class="text-decoration-none">Sign In</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<script>
+    function previewImage() {
+        const input = document.getElementById('imageUpload');
+        const fileNameSpan = document.getElementById('file-name');
+        const previewBox = document.getElementById('preview-box');
+        const previewImg = document.getElementById('preview-img');
+
+        if (input.files && input.files[0]) {
+            fileNameSpan.textContent = input.files[0].name;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImg.src = e.target.result;
+                previewBox.style.display = "block";
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            fileNameSpan.textContent = "No file chosen";
+            previewBox.style.display = "none";
+        }
+    }
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
