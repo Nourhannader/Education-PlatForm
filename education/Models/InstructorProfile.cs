@@ -10,10 +10,13 @@ namespace education.Models
 
         public string Title { get; set; }
         public string Skills { get; set; } 
-        public bool IsApproved { get; set; } = false;
+        public string Bio { get; set; }
+        
+        
 
         // Navigation
         public virtual ICollection<Course> Courses { get; set; } 
-        public virtual ICollection<Review> Reviews { get; set; } 
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Follow> Followers { get; set; }
     }
 }
