@@ -6,8 +6,8 @@ namespace education.Models
     {
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string? Bio {  get; set; }
         public string? imageUrl {  get; set; }
+        public DateTime? Joined { get; set; } = DateTime.UtcNow;
 
         //navigation property
         public virtual ICollection<Notification> Notifications { get; set; }

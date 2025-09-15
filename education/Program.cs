@@ -16,7 +16,8 @@ namespace education
 
             builder.Services.AddDbContext<ApplicationDbContext>(optionBuilder =>
             {
-                optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
+                optionBuilder.UseLazyLoadingProxies()
+                .UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
