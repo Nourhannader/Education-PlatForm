@@ -11,10 +11,12 @@ namespace education.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int Order { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Media
         public string VideoUrl { get; set; }
         public string PdfUrl { get; set; }
+        public bool isDeleted { get; set; } = false;
 
         // Foreign key to Course
         [ForeignKey("Course")]
